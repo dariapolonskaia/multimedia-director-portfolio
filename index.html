@@ -285,6 +285,18 @@
 .reveal{opacity:1; transform:none;}
 .js .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease,transform .5s ease}
 .js .reveal.show{opacity:1; transform:none}
+
+ /* MOBILE ONLY: сжимаем зазор между зелёной плашкой и About */
+@media (max-width: 860px){
+  /* именно первая плашка под героем */
+  .accent-band.no-top-padding{ margin: 20px 0 10px !important; }
+  #about{ padding-top: 18px !important; }
+}
+
+@media (max-width: 420px){
+  .accent-band.no-top-padding{ margin: 16px 0 8px !important; }
+  #about{ padding-top: 14px !important; }
+}  
 </style>
 </head>
 <body>
