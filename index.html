@@ -286,17 +286,34 @@
 .js .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease,transform .5s ease}
 .js .reveal.show{opacity:1; transform:none}
 
- /* MOBILE ONLY: сжимаем зазор между зелёной плашкой и About */
+ /* MOBILE ONLY — ужимаем зазор между зелёной плашкой и #about */
 @media (max-width: 860px){
   /* именно первая плашка под героем */
-  .accent-band.no-top-padding{ margin: 20px 0 10px !important; }
-  #about{ padding-top: 18px !important; }
+  .accent-band.accent-band--full.no-top-padding{
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;   /* ключевое: снижаем нижний отступ */
+    padding-top: 18px !important;     /* можно оставить как есть, просто компактнее */
+    padding-bottom: 18px !important;
+  }
+
+  /* сама секция About: на всякий случай убираем внешние отступы и снижаем внутренний */
+  section#about.section{
+    margin-top: 0 !important;
+    padding-top: 10px !important;     /* было 200px */
+  }
 }
 
 @media (max-width: 420px){
-  .accent-band.no-top-padding{ margin: 16px 0 8px !important; }
-  #about{ padding-top: 14px !important; }
-}  
+  .accent-band.accent-band--full.no-top-padding{
+    margin-top: 10px !important;
+    margin-bottom: 8px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+  section#about.section{
+    padding-top: 8px !important;
+  }
+} 
 </style>
 </head>
 <body>
