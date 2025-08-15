@@ -11,7 +11,7 @@
 <link href="https://i.vimeocdn.com" rel="preconnect"/>
 <link href="https://www.youtube.com" rel="preconnect"/>
 <style>
-   :root{
+    :root{
       --bg:#0b0b0b;
       --text:#eaeaea;
       --muted:#b7b7b7;
@@ -26,6 +26,7 @@
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
+
     html{ scroll-behavior:smooth; }
     section[id]{ scroll-margin-top: var(--anchor-offset); }
 
@@ -285,35 +286,6 @@
 .reveal{opacity:1; transform:none;}
 .js .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease,transform .5s ease}
 .js .reveal.show{opacity:1; transform:none}
-
- /* MOBILE ONLY — ужимаем зазор между зелёной плашкой и #about */
-@media (max-width: 860px){
-  /* именно первая плашка под героем */
-  .accent-band.accent-band--full.no-top-padding{
-    margin-top: 12px !important;
-    margin-bottom: 12px !important;   /* ключевое: снижаем нижний отступ */
-    padding-top: 18px !important;     /* можно оставить как есть, просто компактнее */
-    padding-bottom: 18px !important;
-  }
-
-  /* сама секция About: на всякий случай убираем внешние отступы и снижаем внутренний */
-  section#about.section{
-    margin-top: 0 !important;
-    padding-top: 10px !important;     /* было 200px */
-  }
-}
-
-@media (max-width: 420px){
-  .accent-band.accent-band--full.no-top-padding{
-    margin-top: 10px !important;
-    margin-bottom: 8px !important;
-    padding-top: 16px !important;
-    padding-bottom: 16px !important;
-  }
-  section#about.section{
-    padding-top: 40px !important;
-  }
-} 
 </style>
 </head>
 <body>
@@ -582,6 +554,10 @@
 </footer>
 <!-- Scroll to Top button -->
 <button aria-label="Scroll to top" id="scrollTopBtn">↑</button>
+<!-- Sticky CTA on mobile -->
+<div class="sticky-cta">
+<a class="cta-inner" href="#contact">Tell me about your idea</a>
+</div>
 <script>
     // Header height -> CSS var for offsets
     const header = document.querySelector('header.sticky');
