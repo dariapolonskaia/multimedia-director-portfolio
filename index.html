@@ -324,11 +324,9 @@
 }
 
 /* Заголовок и подпись внутри */
-.accent-band .band-title{ color: var(--text); }
+.accent-band .band-title { color: var(--accent) !important; }
 .accent-band .band-sub{ color: var(--muted); }
-
-/* Класс для стрелок внутри заголовка */
-.accent-band .arrow-green{ color: var(--accent); }
+.accent-band .arrow-green { color: var(--accent) !important; }
 
 </style>
 </head>
@@ -743,15 +741,15 @@
     }
   });
 })();
+</script>
 
 <script>
   (function(){
     const t = document.querySelector('.accent-band .band-title');
-    if(!t) return;
-    // оборачиваем каждый символ "→" в span с зелёным цветом
+    if (!t) return;
     t.innerHTML = t.textContent.replace(/→/g, '<span class="arrow-green">→</span>');
   })();
 </script>
 
-</script></body>
+</body>
 </html>
