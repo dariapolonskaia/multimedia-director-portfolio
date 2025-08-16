@@ -337,6 +337,40 @@ header.sticky .container.nav {
     padding-right: 20px;
   }
 }
+/* === Classic burger === */
+.burger{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px; height:44px;
+  padding:0; margin:0;
+  background:transparent;         
+  border:none;                     
+  cursor:pointer;
+  color:var(--text);
+}
+.burger:focus-visible{ outline:2px solid rgba(255,255,255,.35); border-radius:8px; }
+
+.burger span{
+  display:block;
+  width:24px; height:2px;
+  background:currentColor;         
+  border-radius:2px;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.burger span + span{ margin-top:5px; }  
+
+
+.burger.is-open span:nth-child(1){
+  transform:translateY(7px) rotate(45deg);
+}
+.burger.is-open span:nth-child(2){
+  opacity:0;
+}
+.burger.is-open span:nth-child(3){
+  transform:translateY(-7px) rotate(-45deg);
+}
+
 </style>
 </head>
 <body>
@@ -355,10 +389,12 @@ header.sticky .container.nav {
 <a class="btn" href="#contact">Let’s talk</a>
 </nav>
 <!-- Burger -->
-<button aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu" class="burger">
-<span></span><span></span><span></span>
-</button>
-</div>
+<button class="burger" type="button"
+            aria-controls="mobileMenu" aria-expanded="false"
+            aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 <!-- Mobile menu (appears under sticky header) -->
 <nav aria-label="Mobile" class="mobile-menu" hidden="" id="mobileMenu">
