@@ -772,6 +772,58 @@
       });
     })();
   </script>
+
+  <script>
+(() => {
+  // если нужно, автоматически проставим бэкграунд из data-thumb
+  function applyThumb(box){
+    const holder = box.querySelector('.video-lazy');
+    if (!holder) return;
+    const thumb = box.getAttribute('data-thumb');
+    if (thumb) holder.style.backgroundImage = `url('${thumb}')`;
+  }
+
+  // по клику ставим src из data-src и ждём load
+  function wire(box){
+    if (box.__wired) return;
+    box.__wired = true;
+    applyThumb(box);
+
+    const btn = box.querySelector('.video-play');
+    const iframe = box.querySelector('iframe');
+    if (!btn || !iframe) return;
+
+    btn.addEventListener('click', () => {
+      const url = iframe.dataset.src || iframe.src;
+      if (!url) return;
+
+      // если src ещё не выставлен — ставим
+      if (!iframe.src) iframe.src = url;
+
+      // когда загрузится — показываем iframe и снимаем оверлей
+      const onLoad = () => {
+        box.classList.add('is-loaded');
+        box.querySelector('.video-lazy')?.remove();
+        btn.remove();
+        iframe.removeEventListener('load', onLoad);
+      };
+      iframe.addEventListener('load', onLoad, { once:true });
+    });
+
+    // если кто-то уже выставил src раньше — снимем оверлей после load
+    if (iframe.src){
+      iframe.addEventListener('load', () => {
+        box.classList.add('is-loaded');
+        box.querySelector('.video-lazy')?.remove();
+        btn.remove();
+      }, { once:true });
+    }
+  }
+
+  document.querySelectorAll('.video-embed').forEach(wire);
+})();
+</script>
+  
 <script>
 // Mobile-only click-to-play for .video-embed (desktop keeps inline iframes)
 (function(){
