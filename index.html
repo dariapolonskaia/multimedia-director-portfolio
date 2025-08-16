@@ -351,6 +351,37 @@ header.sticky .container.nav {
   .burger.is-open span:nth-child(2){ opacity: 0; }
   .burger.is-open span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
 }
+   /* Бургер и шапка всегда поверх всего */
+header.sticky{
+  position: sticky;
+  top: 0;
+  z-index: 10020;            /* было 50 */
+}
+
+/* сам бургер ещё выше (чтобы клики не перекрывал iframe) */
+.burger{
+  position: relative;
+  z-index: 10030;
+}
+
+/* мобильное меню поверх всего и фиксированное к вьюпорту */
+.mobile-menu{
+  position: fixed;           /* вместо sticky */
+  top: calc(var(--safe-top) + var(--nav-h));
+  left: 0;
+  right: 0;
+  z-index: 10010;
+}
+
+/* страховка от наглых плееров */
+.video-embed iframe,
+.hero .bgVideo iframe{
+  position: relative;
+  z-index: 0;                /* чтобы они не лезли наверх */
+}
+
+/* когда меню открыто — блокируем скролл страницы */
+body.menu-open{ overflow: hidden; }
    
 </style>
 </head>
@@ -675,11 +706,13 @@ header.sticky .container.nav {
         burger.classList.remove('is-open');
         burger.setAttribute('aria-expanded','false');
         menu.hidden = true;
+        document.body.classList.remove('menu-open'); 
       };
       const open = () => {
         burger.classList.add('is-open');
         burger.setAttribute('aria-expanded','true');
         menu.hidden = false;
+        document.body.classList.add('menu-open'); 
       };
       burger.addEventListener('click', ()=>{
         const opened = burger.classList.contains('is-open');
