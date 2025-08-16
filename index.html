@@ -382,6 +382,48 @@ header.sticky{
 
 /* когда меню открыто — блокируем скролл страницы */
 body.menu-open{ overflow: hidden; }
+/* Процесс: горизонтально на десктопе, вертикально на мобиле */
+.process{
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  gap:14px;
+  font-weight:800;
+  font-size:clamp(28px,3.2vw,40px);
+  line-height:1.1;
+}
+.process[data-steps] > span{
+  position:relative;
+  padding:0 14px;
+}
+
+/* Стрелки вправо между шагами (десктоп) */
+.process[data-steps] > span:not(:last-child)::after{
+  content:'→';
+  position:absolute;
+  right:-14px;
+  top:50%;
+  transform:translateY(-50%);
+  opacity:.85;
+}
+
+/* Мобилка: шаги столбиком и стрелки вниз */
+@media (max-width:860px){
+  .process{ 
+    flex-direction:column; 
+    gap:8px;
+  }
+  .process[data-steps] > span{
+    padding:0;
+  }
+  .process[data-steps] > span:not(:last-child)::after{
+    content:'↓';
+    position:static;
+    display:block;
+    margin:6px auto 0;
+    transform:none;
+  }
+}
    
 </style>
 </head>
@@ -544,7 +586,11 @@ body.menu-open{ overflow: hidden; }
 <!-- ACCENT BLOCK #2 -->
 <section aria-label="highlight" class="accent-band accent-band--full">
 <div class="band-content">
-<h2 class="band-title">Idea → Storyboard → Motion</h2>
+<div class="band-title process" data-steps>
+  <span>Idea</span>
+  <span>Storyboard</span>
+  <span>Motion</span>
+</div>
 <p class="band-sub">Full-cycle production for campaigns, explainers, and social content.</p>
 </div>
 </section>
