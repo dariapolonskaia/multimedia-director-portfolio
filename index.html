@@ -158,7 +158,6 @@
     .accent-band .band-title{font-size:clamp(28px,3.2vw,40px);font-weight:800;line-height:1.1;margin:0 0 10px;text-align:center;}
     .accent-band .band-sub{max-width:1120px;margin:0 auto;font-size:clamp(16px,1.6vw,18px);text-align:center;}
 
-    [aria-label="highlight"] { padding: 30px 0; }
     .accent-band--full.no-top-padding{ padding-top:36px; margin-top:0; }
 
     .cta-band{
@@ -382,48 +381,6 @@ header.sticky{
 
 /* когда меню открыто — блокируем скролл страницы */
 body.menu-open{ overflow: hidden; }
-/* Процесс: горизонтально на десктопе, вертикально на мобиле */
-.process{
-  display:flex; 
-  align-items:center; 
-  justify-content:center; 
-  gap:14px;
-  font-weight:800;
-  font-size:clamp(28px,3.2vw,40px);
-  line-height:1.1;
-}
-.process[data-steps] > span{
-  position:relative;
-  padding:0 14px;
-}
-
-/* Стрелки вправо между шагами (десктоп) */
-.process[data-steps] > span:not(:last-child)::after{
-  content:'→';
-  position:absolute;
-  right:-14px;
-  top:50%;
-  transform:translateY(-50%);
-  opacity:.85;
-}
-
-/* Мобилка: шаги столбиком и стрелки вниз */
-@media (max-width:860px){
-  .process{ 
-    flex-direction:column; 
-    gap:8px;
-  }
-  .process[data-steps] > span{
-    padding:0;
-  }
-  .process[data-steps] > span:not(:last-child)::after{
-    content:'↓';
-    position:static;
-    display:block;
-    margin:6px auto 0;
-    transform:none;
-  }
-}
    
 </style>
 </head>
@@ -581,17 +538,6 @@ body.menu-open{ overflow: hidden; }
 </ul>
 </div></div>
 </div>
-</div>
-</section>
-<!-- ACCENT BLOCK #2 -->
-<section aria-label="highlight" class="accent-band accent-band--full">
-<div class="band-content">
-<div class="band-title process" data-steps>
-  <span>Idea</span>
-  <span>Storyboard</span>
-  <span>Motion</span>
-</div>
-<p class="band-sub">Full-cycle production for campaigns, explainers, and social content.</p>
 </div>
 </section>
 <!-- PORTFOLIO -->
