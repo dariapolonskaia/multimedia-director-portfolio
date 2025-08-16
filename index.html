@@ -753,16 +753,20 @@ body.menu-open{ overflow: hidden; }
 (function(){
   const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
   const mkThumb = (src) => {
-    try{
-      const u = new URL(src, location.href);
-      if (u.hostname.includes('youtube.com') && u.pathname.includes('/embed/')){
-        const id = u.pathname.split('/').pop();
-        return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-      }
-      // Vimeo: need API for thumbnail; fallback to none
-      return null;
-    }catch(e){ return null; }
-  };
+  try{
+    const u = new URL(src, location.href);
+    const host = u.hostname.replace('www.','');
+    let id = null;
+
+    if ((host.includes('youtube.com') || host.includes('youtube-nocookie.com')) && u.pathname.includes('/embed/')) {
+      id = u.pathname.split('/').pop();
+    } else if (host === 'youtu.be') {
+      id = u.pathname.slice(1);
+    }
+
+    return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+  }catch(e){ return null; }
+};
   const enhance = () => {
     if (!isMobile()) return; // desktop: do nothing
     document.querySelectorAll('.video-embed').forEach(box=>{
@@ -776,7 +780,7 @@ body.menu-open{ overflow: hidden; }
       iframe.remove();
       const holder = document.createElement('div');
       holder.className = 'video-lazy';
-      const thumb = mkThumb(src) || box.getAttribute('data-thumb');
+     const thumb = mkThumb(src) || box.getAttribute('data-thumb') || 'https://i.ytimg.com/vi_webp/404/mqdefault.webp';
       if (thumb) holder.style.backgroundImage = `url('${thumb}')`;
       const btn = document.createElement('button');
       btn.type = 'button';
