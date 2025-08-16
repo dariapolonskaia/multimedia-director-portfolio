@@ -376,11 +376,26 @@ header.sticky{
 .video-embed iframe,
 .hero .bgVideo iframe{
   position: relative;
-  z-index: 0;                /* чтобы они не лезли наверх */
+  z-index: 0;                
 }
 
 /* когда меню открыто — блокируем скролл страницы */
 body.menu-open{ overflow: hidden; }
+
+   /* Mobile: no green background under the eyes */
+@media (max-width: 860px){
+  .contacts-right .green-band{
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    height: auto;          /* чтобы не оставалась лишняя высота */
+    padding: 0;            /* убираем внутренние отступы-поля */
+  }
+  .contacts-right .green-band img{
+    height: 72px;          /* подбери размер, если нужно больше/меньше */
+    width: auto;
+  }
+}
    
 </style>
 </head>
