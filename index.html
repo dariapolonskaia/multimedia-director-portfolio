@@ -158,7 +158,15 @@
     z-index:3;
   }
   .video-embed .video-play:hover{ transform:translateY(-1px) }
-
+/* центрируем кнопку поверх постера и делаем z-index рабочим */
+.video-embed .video-play{
+  position: absolute;          /* <— ключевое */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  z-index: 3;                  /* теперь реально выше .video-lazy (z:2) */
+}
   /* Спец: Showreel без рамки */
   #showreel .video-embed{ border:none; border-radius:12px }
 
@@ -466,8 +474,8 @@
 <section class="section" id="showreel">
 <div class="container">
 <h2 class="reveal">Showreel</h2>
-<div class="video-embed reveal" style="margin-top:18px"
-     data-thumb="reelcover.png">
+
+  <div class="video-embed" data-thumb="reelcover.png">
   <div class="video-lazy"></div>
   <button class="video-play" type="button" aria-label="Play video">▶</button>
   <iframe
@@ -479,6 +487,7 @@
     data-src="https://player.vimeo.com/video/1108995251?autoplay=1&muted=1&title=0&byline=0&dnt=1&transparent=0&playsinline=1">
   </iframe>
 </div>
+  
 </div>
 </section>
 <!-- SERVICES -->
