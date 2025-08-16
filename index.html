@@ -142,30 +142,44 @@
   .video-embed.is-loaded iframe{ opacity:1 }
 
   /* Постер-оверлей для всех брейкпоинтов */
-  .video-embed .video-lazy{
-    position:absolute; inset:0;
-    display:grid; place-items:center;
-    background:#000 center/cover no-repeat;
-    z-index:2;
-  }
-  .video-embed .video-play{
-    width:72px; height:72px;
-    border:none; border-radius:50%;
-    background:var(--accent); color:var(--accent-ink);
-    font-size:28px; cursor:pointer;
-    box-shadow:var(--shadow);
-    transition:transform .12s ease;
-    z-index:3;
-  }
-  .video-embed .video-play:hover{ transform:translateY(-1px) }
-/* центрируем кнопку поверх постера и делаем z-index рабочим */
+  /* Постер лежит поверх iframe */
+.video-embed .video-lazy{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  background:#000 center/cover no-repeat;
+  z-index:2;
+}
+
+/* ЕДИНСТВЕННОЕ определение кнопки Play */
 .video-embed .video-play{
-  position: absolute;          /* <— ключевое */
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: auto;
-  z-index: 3;                  /* теперь реально выше .video-lazy (z:2) */
+  position:absolute; left:50%; top:50%;
+  width:72px; height:72px;
+  margin:0; padding:0;
+  display:inline-grid; place-items:center;
+  border:none; border-radius:50%;
+  background:var(--accent); color:var(--accent-ink);
+  font:inherit; font-weight:800; line-height:1; /* чтобы знак ▶ был ровный */
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  transform:translate(-50%, -50%);           /* центрирование */
+  transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  pointer-events:auto;
+  z-index:3;                                  /* выше .video-lazy (z:2) */
+}
+
+/* hover/focus — лёгкий “подскок”, без конфликта с центрированием */
+.video-embed .video-play:hover,
+.video-embed .video-play:focus-visible{
+  transform:translate(-50%, calc(-50% - 2px));
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+  outline:none;
+}
+
+/* Мобильный размер */
+@media (max-width:520px){
+  .video-embed .video-play{
+    width:62px; height:62px; font-size:24px;
+  }
 }
   /* Спец: Showreel без рамки */
   #showreel .video-embed{ border:none; border-radius:12px }
